@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+
+    <entry name="pomodoroLength" type="Int">
+      <default>25</default>
+    </entry>
+
+    <entry name="shortBreakLength" type="Int">
+      <default>5</default>
+    </entry>
+
+    <entry name="longBreakLenght" type="Int">
+      <default>15</default>
+    </entry>
+
+    <entry name="perDayPauseTime" type="Int">
+      <default>10</default>
+    </entry>
+
+    <entry name="pomodorosPerLongBreak" type="Double">
+      <default>4.0</default>
+    </entry>
+
+    <entry name="warningBeforeRing" type="Bool">
+      <default>true</default>
+    </entry>
+
+    <entry name="secondsWarningBeforeRing" type="Int">
+      <default>6</default>
+    </entry>
+
+    <entry name="manualMode" type="Bool">
+      <default>true</default>
+    </entry>
+
+    <entry name="tickingVolume" type="Int">
+      <default>100</default>
+    </entry>
+
+    <entry name="infiniteRingTime" type="Bool">
+      <default>true</default>
+    </entry>
+
+    <entry name="ringTime" type="Double">
+      <default>10.0</default>
+    </entry>
+
+<!--    <entry name="monitorType" type="Enum">
+        <choices>
+            <choice name="Bar"/>
+	    <choice name="Circular"/>
+            <choice name="Compact Bar"/>
+        </choices>
+        <default>0</default>
+    </entry>-->
+
+  </group>
+
+</kcfg>
