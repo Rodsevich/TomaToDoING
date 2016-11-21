@@ -23,7 +23,7 @@ Item {
             name: i18n("Pomodoro duration:"),
             svgName: "tomatoid-running",
             confVar: "cfg_pomodoroLength",
-            min: 10,
+            min: 1,
             max: 60,
             color: "#A70"
         },

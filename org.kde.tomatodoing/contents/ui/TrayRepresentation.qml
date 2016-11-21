@@ -28,17 +28,8 @@ Item {
     property bool showTimer: true
     property string timeString: Qt.formatTime(new Date(0,0,0,0,0, root.timer.seconds), "mm:ss")
 
-    PlasmaCore.Svg {
-        id: svgIconsFile
-        imagePath: plasmoid.file("images", "trayIcons.svg") // "../images/tomatoid.svgz" // "../images/tomatoes-" + sourceIcon + ".svg"
-    }
-
-    PlasmaCore.SvgItem {
-        id: svgIconItem
-        anchors.fill: parent
-        svg: svgIconsFile
-        elementId: "tomatoid-idle"
-    }
+    Layout.minimumWidth: 200
+    Layout.maximumWidth: 400
 
 //    Image {           //Con SVG no escala
 //        id: longa
@@ -46,9 +37,39 @@ Item {
 //        anchors.fill: parent
 //    }
 
+    PlasmaCore.Svg {
+        id: svgIconsFile
+        imagePath: plasmoid.file("images", "trayIcons.svg") // "../images/tomatoid.svgz" // "../images/tomatoes-" + sourceIcon + ".svg"
+    }
+
+    PlasmaCore.SvgItem {
+        id: svgIconItem
+        height: parent.height
+        width: parent.height
+        svg: svgIconsFile
+        elementId: "tomatoid-idle"
+    }
+
+    Rectangle {
+        id: displayBackground
+        width: parent.width - svgIconItem.width
+        color: theme.viewBackgroundColor
+        height: parent.height * .8
+        anchors.left: svgIconItem.right
+        anchors.verticalCenter: svgIconItem.verticalCenter
+        radius: 20
+    }
+
+    Text{
+        id: displayText
+        text: root.currentTodo.summary
+        color: theme.complementaryTextColor
+        anchors.centerIn: displayBackground
+    }
+
     Item {
         id: timerContainer
-        anchors.centerIn: parent
+        anchors.centerIn: svgIconItem
         visible: false
         property real size: Math.min(parent.width, parent.height)
         height: size
@@ -57,7 +78,7 @@ Item {
         Rectangle {
             id: labelRect
             // should be 40 when size is 90
-            width: Math.max(parent.size*4/9, 35)
+            width: Math.max(parent.size*4/9, 35)// ¡4/9! soy complicado, eh... O.o
             height: width/2
             anchors.centerIn: parent
             color: theme.backgroundColor

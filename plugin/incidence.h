@@ -37,9 +37,9 @@ Q_SIGNALS:
     void summaryChanged();
     void priorityChanged();
 
-protected:
     virtual KCalCore::Incidence* get_object() = 0;
 
+protected:
     QString* longa;
 
 private:

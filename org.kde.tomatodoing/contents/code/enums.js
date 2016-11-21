@@ -39,7 +39,8 @@ var IdleStatus = {//        Should be   0x0XX
     SCHEDULED_TODO_START:               0X10,
     TODO_SELECTED:                      0X20,
         TODO_DOUBLECLICKED:             0X21,
-        TODO_DBUS_STARTED:              0X22
+        TODO_DBUS_STARTED:              0X22,
+    MAX_TIME_EXCEEDED:                  0x30
 };
 
 var WorkingStatus = {//     Should be   0x1XX

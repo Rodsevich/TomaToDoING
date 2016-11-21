@@ -32,4 +32,16 @@ GeneralStatePage{
         todoList.createNewToDo();
     }
 
+    Timer{
+        id: maximumIdleTimeModeTimer
+        running: root.maxIdleTimeMode
+        interval: root.maxIdleMinutes * 60000// 60 seconds * 1000 miliseconds
+        onTriggered: callEndingFunction(Enums.IdleStatus.MAX_TIME_EXCEEDED)
+    }
+
+    Component.onCompleted: {
+        if(root.maxIdleTimeMode)
+            maximumIdleTimeModeTimer.restart();
+    }
+
 }

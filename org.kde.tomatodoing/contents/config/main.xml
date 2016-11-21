@@ -15,7 +15,7 @@
       <default>5</default>
     </entry>
 
-    <entry name="longBreakLenght" type="Int">
+    <entry name="longBreakLength" type="Int">
       <default>15</default>
     </entry>
 
@@ -23,8 +23,8 @@
       <default>10</default>
     </entry>
 
-    <entry name="pomodorosPerLongBreak" type="Double">
-      <default>4.0</default>
+    <entry name="pomodorosPerLongBreak" type="Int">
+      <default>4</default>
     </entry>
 
     <entry name="warningBeforeRing" type="Bool">
@@ -41,6 +41,14 @@
 
     <entry name="tickingVolume" type="Int">
       <default>100</default>
+    </entry>
+
+    <entry name="maxIdleMinutes" type="Int">
+      <default>5</default>
+    </entry>
+
+    <entry name="maxIdleTimeMode" type="Bool">
+      <default>false</default>
     </entry>
 
     <entry name="infiniteRingTime" type="Bool">
