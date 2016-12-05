@@ -1,6 +1,7 @@
 #ifndef FILECALENDARPLUGIN_H
-#define PRUEBALUGIN_H
+#define FILECALENDARPLUGIN_H
 
+#include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 #include "filecalendar.h"
 #include "incidence.h"
