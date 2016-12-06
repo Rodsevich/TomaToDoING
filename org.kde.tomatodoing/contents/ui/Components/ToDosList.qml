@@ -146,7 +146,7 @@ Item {
             cacheBuffer: 4
             model: toDoNavModel.todos
             width: parent.width
-            height: contentHeight
+            height: Math.max(contentHeight, 300)
             delegate: ToDoListViewDelegate {
                 width: parent.width
                 onClicked: {
