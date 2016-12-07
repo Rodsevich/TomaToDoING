@@ -3,15 +3,18 @@
 
 #include <QFile>
 #include <QObject>
+#include <QDebug>
 #include <QTextStream>
 #include <QQmlListProperty>
 #include <QFileSystemWatcher>
 #include <kcalcore/calendar.h>
 #include <kcalcore/filestorage.h>
 #include <kcalcore/memorycalendar.h>
+#include <kcalcore/icalformat.h>
 #include "calendartodo.h"
 #include "calendarevent.h"
 
+class Incidence;
 class FileCalendar : public QObject
 {
     Q_OBJECT
@@ -24,6 +27,8 @@ public:
     Q_INVOKABLE void addEvent(CalendarEvent* event);
     Q_INVOKABLE bool loadCalendar();
     Q_INVOKABLE bool saveCalendar();
+    Q_INVOKABLE QObject* componentByUid(QString uid);
+    Q_INVOKABLE bool deleteIncidenceByUid(QString uid);
 
     QString uri();
     void setUri(QString &uri);
@@ -33,24 +38,26 @@ public:
 
     FileCalendar(QObject* parent = 0);
     ~FileCalendar();
-//    QString leer();
 
 public slots:
-    void fileChangedSlot(QString file);
+    void fileChangedSlot();
 
 Q_SIGNALS:
     void uriChanged();
     void fileChanged();
     void todosChanged();
     void eventsChanged();
+    void todoSortFieldChanged();
+    void sortDirectionChanged();
 
 private:
     QString _uri;
     KCalCore::MemoryCalendar::Ptr _calendar;
     KCalCore::FileStorage* _storage = 0;
-    QFileSystemWatcher _watcher;
-    QList<CalendarToDo*> listToDos;
+//    KCalCore::FileStorage::Ptr _storage;
     QList<CalendarEvent*> listEvents;
+    QList<CalendarToDo*> listToDos;
+    QFileSystemWatcher _watcher;
 
     void reloadEvents();
     void reloadTodos();

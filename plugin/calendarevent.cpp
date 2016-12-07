@@ -5,8 +5,8 @@ CalendarEvent::CalendarEvent(QObject *parent)
     _object = new KCalCore::Event();
 }
 
-CalendarEvent::CalendarEvent(QObject *parent, KCalCore::Event *event)
-    : Incidence(parent){
+CalendarEvent::CalendarEvent(QObject *parent, FileCalendar *calendar, KCalCore::Event *event)
+    : Incidence(parent, calendar){
     _object = event;
 }
 
