@@ -22,13 +22,22 @@ GeneralStatePage{
 
     function mainActionButtonClickHandler(){
         root.ringSound.stop();
-        callEndingFunction(Enums.PauseStatus.MAIN_ACTION_BUTTON_CLICKED);
+        callEndingFunction(Enums.RingingStatus.MAIN_ACTION_BUTTON_CLICKED);
+    }
+
+    Timer{
+        id: ringingLimiter
+        running: !root.infiniteRinging
+        interval: root.ringTime
+        onTriggered: {
+            root.ringSound.stop();
+            callEndingFunction(Enums.RingingStatus.TIMEOUT);
+        }
     }
 
     Component.onCompleted: {
-        if(root.preventRing)
-            root.preventRing = false;
-        else
-            root.ringSound.play()
+        if(!root.infiniteRinging)
+            ringingLimiter.restart();
+        root.ringSound.play();
     }
 }

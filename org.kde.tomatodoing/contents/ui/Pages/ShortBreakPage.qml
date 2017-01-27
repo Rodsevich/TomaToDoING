@@ -20,14 +20,14 @@ GeneralStatePage{
         }
     }
 
-    Text {
-        id: recordatorio
-        text: "Revisar todos los carteles (+1 min)"
-        color: "#A7D"
-        anchors.top: parent.top
-        font.pixelSize: 32
-        font.bold: true
-    }
+//    Text {
+//        id: recordatorio
+//        text: "Revisar todos los carteles (+1 min)"
+//        color: "#A7D"
+//        anchors.top: parent.top
+//        font.pixelSize: 32
+//        font.bold: true
+//    }
 
 
     function mainActionButtonClickHandler(){

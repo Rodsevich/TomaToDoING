@@ -32,7 +32,7 @@
     </entry>
 
     <entry name="secondsWarningBeforeRing" type="Int">
-      <default>6</default>
+      <default>3</default>
     </entry>
 
     <entry name="manualMode" type="Bool">
@@ -51,12 +51,12 @@
       <default>false</default>
     </entry>
 
-    <entry name="infiniteRingTime" type="Bool">
-      <default>true</default>
+    <entry name="infiniteRinging" type="Bool">
+      <default>false</default>
     </entry>
 
-    <entry name="ringTime" type="Double">
-      <default>10.0</default>
+    <entry name="ringTime" type="Int">
+      <default>10</default>
     </entry>
 
 <!--    <entry name="monitorType" type="Enum">

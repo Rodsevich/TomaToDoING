@@ -54,6 +54,9 @@
         property int tickingVolume: plasmoid.configuration.tickingVolume
         property int pomodorosGoal: 11
         property int todayBreakTimeSaved: 0
+        property bool infiniteRinging: plasmoid.configuration.infiniteRinging
+        property int ringTime: plasmoid.configuration.ringTime
+
     
         //Internal vars
         property QtObject currentTodo: root.dummyTodo
@@ -169,9 +172,9 @@
                     Logic.startWorking();
                 break;
                 case Enums.States.WORKING:
-                    if(Logic.enumsEquals(Enums.WorkingStatus.DROP, finishStatus)){
+                    if(Logic.enumsEquals(finishStatus, Enums.WorkingStatus.DROP)){
                         Logic.startIdle();
-                    }else if(Logic.enumsEquals(Enums.WorkingStatus.PAUSE, finishStatus)){
+                    }else if(Logic.enumsEquals(finishStatus, Enums.WorkingStatus.PAUSE)){
                         Logic.startPause();
                     }else{
                         if(currentTodo === dummyTodo){
