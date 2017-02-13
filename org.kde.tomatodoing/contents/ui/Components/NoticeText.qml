@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item{
 
     property color backgroundColor: "red"
-    property color textColor: "darkblue"
+    property color textColor: "lightblue"
     property string text: "TEXT TO SHOW"
 
     Rectangle{
