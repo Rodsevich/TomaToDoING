@@ -40,18 +40,42 @@ Item {
 
 //    PlasmaComponents.Label{
 //        id: mainLabel
-//        text: root.task.name
-//        anchors.horizontalCenter: fullRepresentation.horizontalCenter
-//        anchors.top: fullRepresentation.top
+////        text: "altura: " + stack.height + " UI height: " + calEventsUI.implicitHeight + " mainActBtn: " + (mainActionButton.top + 0)
+//        text: "mainActBtn: " + mainActionButton.top
+//        anchors.bottom: mainActionButton.top
 //        anchors.topMargin: 5
 //    }
 
-    Keys.forwardTo: [root.stack.currentPage]
+    CalendarEventUI{
+        id: calEventsUI
+        calendar: root.calendarObject
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        onStartedEvent: stack.currentPage.signalize("eventAutoStart", _event)
+    }
+
+    PlasmaComponents.PageStack {
+        id: stack
+        //width automaticamente seteado al del parent
+//        height: null
+        anchors.top: calEventsUI.bottom
+        //No parece funcar
+//        anchors.bottom: mainActionButton.top
+//        anchors.bottomMargin: 3
+        z: -99
+        initialPage: root.idlePage
+    }
+
+    Keys.forwardTo: [stack.currentPage]
 
     PlasmaComponents.ToolButton {
         id: mainActionButton
         width: 60
         height: width
+        implicitHeight: height
+        implicitWidth: width
         z: 100
         enabled: {
             switch(root.state){
@@ -87,7 +111,10 @@ Item {
 
     Component.onCompleted: {
         //set root.stack as this fullrepresentation child
-        root.stack.parent = this;
+//        root.stack.parent = this;
 //        root.stack.anchors.fill = fullRepresentation;
+        root.stack = stack;
+        root.setFullRepresentationPageStack(stack);
+        console.log(calEventsUI.calendar.events.lenght);
     }
 }

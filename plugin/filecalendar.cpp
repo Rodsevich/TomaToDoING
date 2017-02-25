@@ -35,6 +35,7 @@ bool FileCalendar::loadCalendar()
         return false;
 }
 
+//Calcula sólo los del día actual, eh!
 void FileCalendar::reloadEvents()
 {
     KCalCore::Event::List events(_calendar->rawEventsForDate(QDate::currentDate()));

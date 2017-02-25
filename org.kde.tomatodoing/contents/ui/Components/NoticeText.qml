@@ -6,6 +6,9 @@ Item{
     property color textColor: "lightblue"
     property string text: "TEXT TO SHOW"
 
+    implicitHeight: fondoTexto.height
+    implicitWidth: fondoTexto.width
+
     Rectangle{
         id: fondoTexto
         width: parent.width

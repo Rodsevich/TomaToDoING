@@ -60,6 +60,7 @@
     
         //Internal vars
         property QtObject currentTodo: root.dummyTodo
+        property bool onWorkingEvent: false
         property bool inPomodoro: false
         property bool inBreak: false
         property bool inPause: false
@@ -157,13 +158,14 @@
             Pages.SummarizingPage{}
         }
     
+        property Item stack
         //Page's container (stack)
-        property Item stack: PageStack {
-            id: stack
-            anchors.fill: plasmoid.fullRepresentationItem
-            z: -99
-            initialPage: root.idlePage
-        }
+//        property Item stack: PageStack {
+//            id: stack
+//            anchors.fill: plasmoid.fullRepresentationItem
+//            z: -99
+//            initialPage: root.idlePage
+//        }
     
         function handleStateFinish(stateName, finishStatus){
             DB.updateStatistics(todayStatistics);
@@ -315,13 +317,14 @@
         Component.onCompleted: {
             Logic.root = root;
             Logic.plasmoid = plasmoid;
-            Logic.fullRepresentationPageStack = stack;
             state = Enums.States.IDLE;
             Logic.loadStatistics();
             Logic.restoreFromEventualCrash();
             plasmoid.setActionSeparator("separator0");
-            console.log(currentTodo);
-            console.log(currentTodo.uid);
+        }
+
+        function setFullRepresentationPageStack(stack){
+            Logic.fullRepresentationPageStack = stack;
         }
     
         function actionTriggered(actionName) {

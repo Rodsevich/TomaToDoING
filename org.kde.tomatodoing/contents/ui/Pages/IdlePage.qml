@@ -32,6 +32,11 @@ GeneralStatePage{
         todoList.createNewToDo();
     }
 
+    function signalize(name, args){
+        if(name == "eventAutoStart")
+            callEndingFunction(Enums.IdleStatus.SCHEDULED_TODO_START);
+    }
+
     Timer{
         id: maximumIdleTimeModeTimer
         running: root.maxIdleTimeMode

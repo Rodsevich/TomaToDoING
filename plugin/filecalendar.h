@@ -34,6 +34,7 @@ public:
     void setUri(QString &uri);
 
     QQmlListProperty<CalendarToDo> todos();
+    //Devuelve sólo los del día actual, eh!
     QQmlListProperty<CalendarEvent> events();
 
     FileCalendar(QObject* parent = 0);

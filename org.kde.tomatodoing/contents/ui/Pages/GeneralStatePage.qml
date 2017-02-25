@@ -6,9 +6,19 @@ PlasmaComponents.Page {
 
     anchors.fill: parent
 
+    //No parece funcar con lo que quiero...
+//    implicitHeight: parent.implicitHeight
+//    implicitWidth: parent.implicitWidth
+
     property var registryState: Enums.RegistryTypes.MASK
     property var startingFunction
     property var endingFunction
+
+    function signalize(name, args){
+        console.log("signalHandler called and not reimplemented.")
+        console.trace();
+        return false;
+    }
 
     function callEndingFunction( estado ){
         if(registryState === Enums.RegistryTypes.MASK){

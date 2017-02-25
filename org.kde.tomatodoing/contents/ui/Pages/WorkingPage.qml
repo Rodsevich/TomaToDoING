@@ -12,7 +12,7 @@ import org.kde.plasma.private.filecalendarplugin 0.1
 
 import "../Miscellaneous"
 import "../Components"
-import "../../code/localStorage.js" as DB
+//import "../../code/localStorage.js" as DB
 import "../../code/logic.js" as Logic
 import "../../code/enums.js" as Enums
 
