@@ -14,19 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
-import QtQuick 2.5
+import QtQuick 2.7
 import QtQuick.Layouts 1.2
 import org.kde.plasma.plasmoid 2.0
 import "../code/enums.js" as Enums
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
+import "Components"
 
 Item {
     id: trayRepresentation
 
     property bool showTimer: true
     property string timeString: Qt.formatTime(new Date(0,0,0,0,0, root.timer.seconds), "mm:ss")
+
+    property int arrX1: 10
+    property int arrX2 //: parent.width - arr2.width - 30
 
     Layout.minimumWidth: 200
     Layout.maximumWidth: 400
@@ -55,9 +59,18 @@ Item {
         width: parent.width - svgIconItem.width
         color: theme.viewBackgroundColor
         height: parent.height * .8
-        anchors.left: svgIconItem.right
+        anchors.right: parent.right
+        anchors.horizontalCenter: undefined
         anchors.verticalCenter: svgIconItem.verticalCenter
         radius: 20
+
+        SequentialAnimation on color{
+            id: backgroundColorFlash
+            loops: Animation.Infinite
+            running: false
+            ColorAnimation { duration: 100; to: theme.highlightColor }
+            ColorAnimation { duration: 100; to: theme.complementaryBackgroundColor}
+        }
     }
 
     Text{
@@ -65,6 +78,29 @@ Item {
         text: root.currentTodo.summary
         color: theme.complementaryTextColor
         anchors.centerIn: displayBackground
+    }
+
+    Arrow{
+        id: arr1
+        rotation: 180
+        width: parent.width / 10
+        height: parent.height - 10
+        anchors.verticalCenter: parent.verticalCenter
+        fillColor: theme.viewFocusColor
+        strokeColor: theme.viewTextColor
+        visible: false
+        x: arrX1
+    }
+
+    Arrow{
+        id: arr2
+        width: parent.width / 10
+        height: parent.height - 10
+        anchors.verticalCenter: parent.verticalCenter
+        fillColor: theme.viewFocusColor
+        strokeColor: theme.viewTextColor
+        visible: false
+        x: arrX2
     }
 
     Item {
@@ -109,8 +145,55 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        arrX2 = parent.width - parent.width/10 - 30;
+        arr2.x = arrX2;
+        arrAnim2.restart();
+    }
+
+    SequentialAnimation {
+        id: arrAnim1
+        loops: Animation.Infinite
+        running: false
+
+        NumberAnimation {
+            target: arr1
+            property: "x"
+            duration: 200
+            to: arrX1 + 20
+        }
+
+        NumberAnimation {
+            target: arr1
+            property: "x"
+            duration: 300
+            to: arrX1
+        }
+    }
+
+    SequentialAnimation {
+        id: arrAnim2
+        loops: Animation.Infinite
+        running: false
+
+        NumberAnimation {
+            target: arr2
+            property: "x"
+            duration: 200
+            to: arrX2
+        }
+
+        NumberAnimation {
+            target: arr2
+            property: "x"
+            duration: 300
+            to: arrX2 + 20
+        }
+    }
+
     states: [
         State {
+            name: "idle"
             PropertyChanges {
                 target: svgIconItem
                 elementId: "tomatoid-idle"
@@ -120,6 +203,56 @@ Item {
                 target: timerContainer
                 visible: false
             }
+        },
+        State {
+            name: "idleWhenShouldBeWorking"
+            when: !root.inPomodoro && !root.inPause && !root.inBreak && root.autostarterUI.inEventRunning
+
+            PropertyChanges{
+                target: svgIconItem
+                visible: false
+            }
+
+            PropertyChanges{
+                target: displayBackground
+                anchors.right: undefined
+                anchors.horizontalCenter: trayRepresentation.horizontalCenter
+                width: trayRepresentation.width - (arr1.width + 20 + arrX1) * 2
+            }
+
+            PropertyChanges{
+                target: displayText
+                text: root.autostarterUI.forthcomingEvent.summary
+                font.bold: true
+            }
+
+            PropertyChanges{
+                target: arrAnim1
+                running: true
+            }
+
+            PropertyChanges{
+                target: arrAnim2
+                running: true
+            }
+
+            PropertyChanges{
+                target: backgroundColorFlash
+                running: true
+            }
+
+            PropertyChanges{
+                target: arr1
+                visible: true
+            }
+
+            PropertyChanges{
+                target: arr2
+                visible: true
+            }
+
+            onCompleted: root.sirenSound.play()
+
         },
         State {
             name: "working"
@@ -134,6 +267,13 @@ Item {
                 target: timerContainer
                 visible: true
             }
+
+            PropertyChanges {
+                target: displayBackground
+                color: theme.complementaryFocusColor
+            }
+
+            onCompleted: root.sirenSound.stop()
         },
         State {
             name: "paused"
@@ -164,6 +304,7 @@ Item {
                 target: timerContainer
                 visible: true
             }
+
         }
     ]
 }

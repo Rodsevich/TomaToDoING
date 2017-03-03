@@ -4,7 +4,6 @@ import org.kde.plasma.private.filecalendarplugin 0.1
 Item {
 
     property FileCalendar calendar
-    property CalendarEvent _event
 
     /*
         Special vars:
@@ -13,9 +12,16 @@ Item {
          -%time_to_event_start%
          -%time_to_event_end%
     */
+    //Setters
     property string aboutToStartNotification: "Automatic start of '%event_summary%' in <b>%time_to_event_start%</b>"
     property string startedNotification: "Working on '%event_summary%' for <b>%time_to_event_end%</b> more."
     property string noEventsNotification: "No events to auto-start"
+
+    //Getters
+    property CalendarEvent forthcomingEvent
+    property bool inEventRunning: false
+
+    //Internal vars
     property string _textoCache
     property int _segundosCacheStart
     property int _segundosCacheEnd
@@ -25,8 +31,8 @@ Item {
     signal endedEvent(CalendarEvent event)
     signal changedEvent(CalendarEvent event)
 
-    property alias contador: tim
-    property alias nt: cartelito
+//    property alias contador: tim
+//    property alias nt: cartelito
 
     implicitHeight: cartelito.implicitHeight
     implicitWidth: cartelito.implicitWidth
@@ -73,24 +79,24 @@ Item {
     }
 
     function actualizarCache(){
-        if(_event == null || yaTermino(_event)){
+        if(forthcomingEvent == null || yaTermino(forthcomingEvent)){
             _textoCache = noEventsNotification;
         }
         else{
-            _textoCache = yaEmpezo(_event) ? startedNotification : aboutToStartNotification;
-            _textoCache = _textoCache.replace(/%event_description%/g, _event.description);
-            _textoCache = _textoCache.replace(/%event_summary%/g, _event.summary);
+            _textoCache = yaEmpezo(forthcomingEvent) ? startedNotification : aboutToStartNotification;
+            _textoCache = _textoCache.replace(/%event_description%/g, forthcomingEvent.description);
+            _textoCache = _textoCache.replace(/%event_summary%/g, forthcomingEvent.summary);
 
             var s = _textoCache.replace(/%time_to_event_start%/g, "%-%");
             if(s != _textoCache){ //Hubo cambios
-                _segundosCacheStart = segundosRestantes(_event.startDateTime);
+                _segundosCacheStart = segundosRestantes(forthcomingEvent.startDateTime);
                 _textoCache = s;
             }else
                 _segundosCacheStart = -1;
 
             s = _textoCache.replace(/%time_to_event_end%/g, "%+%");
             if(s != _textoCache){ //Hubo cambios
-                _segundosCacheEnd = segundosRestantes(_event.endDateTime);
+                _segundosCacheEnd = segundosRestantes(forthcomingEvent.endDateTime);
                 _textoCache = s;
             }else
                 _segundosCacheEnd = -1;
@@ -115,28 +121,30 @@ Item {
 //                else
 //                    root.debug("<font color='red'>" + event.summary + "</font>");
             }
-            if(eventito != _event){
-                _event = eventito;
-                changedEvent(_event);
+            if(eventito != forthcomingEvent){
+                forthcomingEvent = eventito;
+                changedEvent(forthcomingEvent);
                 actualizarEstado();
             }
         }else{
-            _event = null;
+            forthcomingEvent = null;
             actualizarCache();
         }
     }
 
     function actualizarEstado(){
-        if(yaTermino(_event)){
+        if(yaTermino(forthcomingEvent)){
             tim.stop();
-            endedEvent(_event);
+            endedEvent(forthcomingEvent);
+            inEventRunning = false;
             this.state = "NoEvents";
             actualizarCache();
             actualizarEvento();
         }else{
-            if(yaEmpezo(_event)){
+            if(yaEmpezo(forthcomingEvent)){
                 this.state = "Started";
-                startedEvent(_event);
+                inEventRunning = true;
+                startedEvent(forthcomingEvent);
             }else
                 this.state = "AboutToStart";
             actualizarCache();

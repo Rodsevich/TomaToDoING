@@ -121,6 +121,12 @@
         property QtObject knockSound: SoundEffect { //Resource nº 5
             source: "../data/Knock.wav"
         }
+
+        property QtObject sirenSound: SoundEffect { //Resource nº 6
+            source: "../data/siren_noise.wav"
+            loops: SoundEffect.Infinite
+            volume: plasmoid.expanded ? 0.1 : 1.0
+        }
     
         property QtObject calendarObject: FileCalendar{
             id: calendarObject
@@ -158,14 +164,27 @@
             Pages.SummarizingPage{}
         }
     
-        property Item stack
+
+        //Items that must be created on the startup of the plasmoid
+
+        property Item autostarterUI: Components.CalendarEventUI{
+            id: autostarterUI
+            calendar: calendarObject
+//            anchors.top: parent.top
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+
+            onStartedEvent: stack.currentPage.signalize("eventAutoStart", forthcomingEvent)
+        }
+
+//        property Item stack
         //Page's container (stack)
-//        property Item stack: PageStack {
-//            id: stack
+        property Item stack: PageStack {
+            id: stack
 //            anchors.fill: plasmoid.fullRepresentationItem
-//            z: -99
-//            initialPage: root.idlePage
-//        }
+            z: -99
+            initialPage: root.idlePage
+        }
     
         function handleStateFinish(stateName, finishStatus){
             DB.updateStatistics(todayStatistics);
@@ -320,12 +339,13 @@
             state = Enums.States.IDLE;
             Logic.loadStatistics();
             Logic.restoreFromEventualCrash();
+            Logic.fullRepresentationPageStack = stack;
             plasmoid.setActionSeparator("separator0");
         }
 
-        function setFullRepresentationPageStack(stack){
-            Logic.fullRepresentationPageStack = stack;
-        }
+//        function setFullRepresentationPageStack(stack){
+//            Logic.fullRepresentationPageStack = stack;
+//        }
     
         function actionTriggered(actionName) {
             switch(actionName){

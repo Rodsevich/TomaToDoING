@@ -46,27 +46,27 @@ Item {
 //        anchors.topMargin: 5
 //    }
 
-    CalendarEventUI{
-        id: calEventsUI
-        calendar: root.calendarObject
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+//    CalendarEventUI{
+//        id: calEventsUI
+//        calendar: root.calendarObject
+//        anchors.top: parent.top
+//        anchors.left: parent.left
+//        anchors.right: parent.right
 
-        onStartedEvent: stack.currentPage.signalize("eventAutoStart", _event)
-    }
+//        onStartedEvent: stack.currentPage.signalize("eventAutoStart", _event)
+//    }
 
-    PlasmaComponents.PageStack {
-        id: stack
-        //width automaticamente seteado al del parent
-//        height: null
-        anchors.top: calEventsUI.bottom
-        //No parece funcar
-//        anchors.bottom: mainActionButton.top
-//        anchors.bottomMargin: 3
-        z: -99
-        initialPage: root.idlePage
-    }
+//    PlasmaComponents.PageStack {
+//        id: stack
+//        //width automaticamente seteado al del parent
+////        height: null
+//        anchors.top: calEventsUI.bottom
+//        //No parece funcar
+////        anchors.bottom: mainActionButton.top
+////        anchors.bottomMargin: 3
+//        z: -99
+//        initialPage: root.idlePage
+//    }
 
     Keys.forwardTo: [stack.currentPage]
 
@@ -111,10 +111,23 @@ Item {
 
     Component.onCompleted: {
         //set root.stack as this fullrepresentation child
-//        root.stack.parent = this;
+        root.autostarterUI.parent = this;
+        root.autostarterUI.anchors.top = this.top;
+        root.autostarterUI.anchors.left = this.left;
+        root.autostarterUI.anchors.right = this.right;
+
+        root.stack.parent = this;
 //        root.stack.anchors.fill = fullRepresentation;
-        root.stack = stack;
-        root.setFullRepresentationPageStack(stack);
-        console.log(calEventsUI.calendar.events.lenght);
+        root.stack.anchors.top = root.autostarterUI.bottom;
+        root.stack.anchors.left = this.left;
+        root.stack.anchors.right = this.right;
+        root.stack.anchors.bottom = this.bottom;
+
+        console.log(root.autostarterUI.height + " " + root.autostarterUI.implicitHeight);
+        console.log(root.autostarterUI.bottom == root.stack.top);
+
+//        root.stack = stack;
+//        root.setFullRepresentationPageStack(stack);
+        console.log(root.autostarterUI.calendar.events.lenght);
     }
 }
