@@ -305,6 +305,7 @@ Item {
                 visible: true
             }
 
+            onCompleted: root.sirenSound.stop()
         }
     ]
 }
