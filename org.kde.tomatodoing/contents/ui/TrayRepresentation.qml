@@ -261,7 +261,6 @@ Item {
             PropertyChanges {
                 target: svgIconItem
                 elementId: "tomatoid-running"
-                visible: true
             }
 
             PropertyChanges {
