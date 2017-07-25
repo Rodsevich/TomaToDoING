@@ -4,6 +4,7 @@
 
   - [ ] _Don't let me distract_ functionality (Will block programs and hosts that are not supposed to help you complete your task while the timer is running)
   - [ ] _Track my progress_ functionality (Will save how much and when you advance in task)
+	- [ ] _Activity Intense Mode_ Will disturb you a lot if no input towards progress is detected (hold Ctrl|Shift|Alt in order to inform you are thinking)
   - [ ] _Take me back to work_ functionality (When no input is detected, will call your attention)
   - [ ] _Keep me reminded_ functionality (Will show the motivators that make you advance)
 >_When you feel like quitting, think about why you started_  
