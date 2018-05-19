@@ -4,6 +4,7 @@
 #include "incidence.h"
 #include <kcalcore/event.h>
 #include <QObject>
+#include <kdatetime.h>
 
 class FileCalendar;
 class CalendarEvent : public Incidence

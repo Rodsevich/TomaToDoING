@@ -112,24 +112,24 @@ void FileCalendar::setUri(QString &uri)
 QQmlListProperty<CalendarToDo> FileCalendar::todos()
 {
     return QQmlListProperty<CalendarToDo>(this, 0,
-					  &FileCalendar::append_todo,
-					  &FileCalendar::count_todo,
-					  &FileCalendar::at_todo,
-					  &FileCalendar::clear_todo);
+                      &FileCalendar::append_todo,
+                      &FileCalendar::count_todo,
+                      &FileCalendar::at_todo,
+                      &FileCalendar::clear_todo);
 }
 
 QQmlListProperty<CalendarEvent> FileCalendar::events()
 {
     return QQmlListProperty<CalendarEvent>(this, 0,
-					  &FileCalendar::append_event,
-					  &FileCalendar::count_event,
-					  &FileCalendar::at_event,
-					  &FileCalendar::clear_event);
+                      &FileCalendar::append_event,
+                      &FileCalendar::count_event,
+                      &FileCalendar::at_event,
+                      &FileCalendar::clear_event);
 }
 
 FileCalendar::FileCalendar(QObject* parent)
     : QObject(parent)
-    , _calendar( new KCalCore::MemoryCalendar( KDateTime::UTC ) )
+    , _calendar( new KCalCore::MemoryCalendar( QTimeZone::utc() ) )
     , _storage(new KCalCore::FileStorage( _calendar, _uri, new KCalCore::ICalFormat()))
 {
     QObject::connect(&this->_watcher, SIGNAL(fileChanged(QString)),

@@ -44,7 +44,7 @@ void Incidence::setPriority(int priority){
 }
 
 QDate Incidence::creationDate(){
-    KDateTime createdDT = get_object()->created();
+    QDateTime createdDT = get_object()->created();
     return createdDT.date();
 }
 
