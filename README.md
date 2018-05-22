@@ -6,7 +6,11 @@ Work the time you need with a background ticking sound that functions as [Pavlov
 Check the [video](https://youtu.be/nongU5LarDU)
 
 
-### Requeriments
+### Requeriments (for ubuntu)
  - extra-cmake-modules of KDE (ecm)
  - gcc compiler
+ - libkf5calendarcore-dev 
+ - kdepimlibs5-dev
+ - kdelibs5-dev
  - qml-module-qtquick-localstorage
+ - to be continued...

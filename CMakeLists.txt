@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-#set(KDE_INSTALL_USE_QT_SYS_PATHS ON CACHE BOOL "Install the plugin in the right directory")
-#message(STATUS "Largando cmake con KDE_INSTALL_USE_QT_SYS_PATHS en modo: ${KDE_INSTALL_USE_QT_SYS_PATHS}")
+set(KDE_INSTALL_USE_QT_SYS_PATHS ON CACHE BOOL "Install the plugin in the right directory")
+message(STATUS "Largando cmake con KDE_INSTALL_USE_QT_SYS_PATHS en modo: ${KDE_INSTALL_USE_QT_SYS_PATHS}")
 
 set(QT_MIN_VERSION "5.3.0")
 set(KF5_MIN_VERSION "5.0.0")
