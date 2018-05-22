@@ -18,12 +18,12 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import org.kde.plasma.plasmoid 2.0
-import QtQuick.LocalStorage 2.0 as Sql
+//import QtQuick.LocalStorage 2.0 as Sql
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-import "../code/localStorage.js" as DB;
+//import "../code/localStorage.js" as DB;
 import "../code/dialogs.js" as Dialogs
 import "../code/logic.js" as Logic
 import "../code/enums.js" as Enums

@@ -27,5 +27,9 @@ target_link_libraries(filecalendarplugin
 			KF5::Archive
                      )
 
-install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/filecalendarplugin)
-install(TARGETS filecalendarplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/filecalendarplugin)
+message("Installing filecalendarplugin in ${KDE_INSTALL_PLUGINDIR} location")
+message("QMLDIR: ${KDE_INSTALL_QMLDIR}")
+message("PLUGINDIR: ${KDE_INSTALL_PLUGINDIR}")
+message("QTPLUGINDIR: ${KDE_INSTALL_QTPLUGINDIR}")
+install(FILES qmldir DESTINATION ${KDE_INSTALL_PLUGINDIR}/org/kde/plasma/private/filecalendarplugin)
+install(TARGETS filecalendarplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/org/kde/plasma/private/filecalendarplugin)

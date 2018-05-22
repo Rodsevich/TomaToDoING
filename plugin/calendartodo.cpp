@@ -2,7 +2,7 @@
 
 QDateTime CalendarToDo::completedDate()
 {
-    return get_object()->completed().dateTime();
+    return get_object()->completed();
 }
 
 CalendarToDo::CalendarToDo(QObject *parent)
@@ -43,7 +43,7 @@ void CalendarToDo::setCompleted(bool completed)
 
 void CalendarToDo::setCompletedDate(QDateTime completedDate)
 {
-    get_object()->setCompleted(new KDateTime(completedDate));
+    get_object()->setCompleted(completedDate);
     emit completedDateChanged();
 }
 

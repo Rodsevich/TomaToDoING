@@ -9,3 +9,4 @@ Check the [video](https://youtu.be/nongU5LarDU)
 ### Requeriments
  - extra-cmake-modules of KDE (ecm)
  - gcc compiler
+ - qml-module-qtquick-localstorage

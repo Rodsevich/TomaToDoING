@@ -19,28 +19,26 @@ CalendarEvent::~CalendarEvent(){
 }
 
 QDateTime CalendarEvent::startDateTime(){
-    KDateTime ret = get_object()->dtStart();
-    return ret.dateTime();
+    return get_object()->dtStart();
 }
 
 void CalendarEvent::setStartDateTime(QDateTime startDT){
-    KDateTime *KstartDT = new KDateTime(startDT);
-    if( get_object()->dtStart() != *KstartDT){
-        get_object()->setDtStart(*KstartDT);
+//    KDateTime *KstartDT = new KDateTime(startDT);
+    if( startDateTime() != startDT){
+        get_object()->setDtStart(startDT);
         emit secondsDurationChanged();
         emit startDateTimeChanged();
     }
 }
 
 QDateTime CalendarEvent::endDateTime(){
-    KDateTime ret =  get_object()->dtEnd();
-    return ret.dateTime();
+    return get_object()->dtEnd();
 }
 
 void CalendarEvent::setEndDateTime(QDateTime endDT){
-    KDateTime *KendDT = new KDateTime(endDT);
-    if( get_object()->dtEnd() != *KendDT){
-        get_object()->setDtEnd(*KendDT);
+//    KDateTime *KendDT = new KDateTime(endDT);
+    if( endDateTime() != endDT){
+        get_object()->setDtEnd(endDT);
         emit secondsDurationChanged();
         emit endDateTimeChanged();
     }

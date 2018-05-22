@@ -4,6 +4,11 @@
 #  : ${DEST:?"Need to set DEST non-empty"}
 #
 
+#Comandos
+#plasmoid_viewer=kpackagelauncherqml
+plasmoid_viewer=plasmawindowed
+plasmoid_installer=kpackagetool5
+
 #kdialog --passivepopup "tenia escruito... $(cat ~/ver_plasmoide)" 2
 #if [ ! -e "~/ver_plasmoide" ]
 #then
@@ -48,10 +53,10 @@ nombre_carpeta_instalacion=`echo $dir_desktop | sed "s%.*/\(.*\)/$%\1%"`
 nombre_real_instalacion=`cat $dir | grep "X-KDE-PluginInfo-Name" | sed "s/^.*=\(.*\)$/\1/"`
 if [[ -d "$HOME/.local/share/plasma/plasmoids/$nombre_real_instalacion" ]]; then
 	echo "Actualizando $dir_desktop$arch_desktop"
-        plasmapkg2 -u $dir_desktop
+        $plasmoid_installer -u $dir_desktop
 else
 	echo "Instalando $dir_desktop$arch_desktop"
-        plasmapkg2 -i $dir_desktop
+        $plasmoid_installer -i $dir_desktop
 fi
 echo "Entrando a $dir_desktop$arch_desktop (=== $dir) Instalando desde '$nombre_carpeta_instalacion' con '$nombre_real_instalacion' de nombre real"
 #if [ $nombre_real_instalacion != $nombre_carpeta_instalacion ]
@@ -64,7 +69,7 @@ touch $arch_cache
 
 #kdialog --passivepopup "largando plasmoidviewer '~/.local/share/plasma/plasmoid/$nombre_real_instalacion'..." 2
 #plasmoidviewer "~/.local/share/plasma/plasmoid/$nombre_real_instalacion"
-kdialog --passivepopup "largando plasmawindowed '$nombre_real_instalacion'..." 2
+kdialog --passivepopup "largando $plasmoid_viewer '$nombre_real_instalacion'..." 2
 kbuildsycoca5
-killall plasmawindowed
-plasmawindowed "$nombre_real_instalacion" 2>&1 | tee ~/.cache/ver_plasmoide.out
+killall $plasmoid_viewer
+$plasmoid_viewer "$nombre_real_instalacion" 2>&1 | tee ~/.cache/ver_plasmoide.out

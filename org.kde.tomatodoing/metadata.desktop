@@ -4,7 +4,7 @@ Name=TomaToDoING
 Comment=Plasmoid for Getting Things Done with Pomodoro technique
 Icon=Pomodoro-Timer.svg
 Type=Service
-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+ServiceTypes=Plasma/Applet
 
 X-KDE-PluginInfo-Author=Nico Rodsevich
 X-KDE-PluginInfo-Email=neton_12@hotmail.com

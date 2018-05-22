@@ -3,6 +3,7 @@
 
 #include "incidence.h"
 #include <kcalcore/todo.h>
+#include <kdatetime.h>
 #include <QObject>
 #include <QDateTime>
 

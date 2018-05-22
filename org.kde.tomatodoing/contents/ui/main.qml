@@ -40,7 +40,7 @@
         property bool test: false
         //Configuration vars
         //times should be in seconds
-        property string calendarLocation: "/home/nico/.local/share/TomaToDoING/data.ics"
+        property string calendarLocation: "/home/nico/.local/share/apps/korganizer/std.ics"
         property int pomodoroLength: test ? 6 : plasmoid.configuration.pomodoroLength * 60
         property int shortBreakLength: test ? 4 : plasmoid.configuration.shortBreakLength * 60
         property int longBreakLength: test ? 7 : plasmoid.configuration.longBreakLength * 60
